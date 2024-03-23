@@ -26,6 +26,7 @@ from src.vframe._column_validation import (
     _vec_len
 )
 from src.vframe.error import ParseError, OutOfBoundError
+from joblib import Parallel, delayed
 
 
 Fields = (Integer | Float | Boolean | Datetime | String | List | Tuple | 
@@ -58,13 +59,14 @@ class BaseModel:
         A dictionary mapping field names to their types, excluding special
         methods.
     """
-    def __init__(self, frame: pd.DataFrame) -> None:
+    def __init__(self, frame: pd.DataFrame, n_jobs: int) -> None:
         if not isinstance(frame, pd.DataFrame):
             raise ValueError("Argument 'frame' must be 'pd.DataFrame'.")
 
         self.frame = frame
         self.field_type = {k: v for k, v in self.__class__.__dict__.items()
                            if not k.startswith('__')}
+        self.n_jobs = n_jobs
 
     @staticmethod
     def _check_null(field: Fields, column: pd.Series, name: str):
@@ -337,6 +339,15 @@ class BaseModel:
                     f"{field.max_length}."
                 )
 
+    def _validate(self, field: Fields, name: str) -> pd.Series:
+        column = self.frame.loc[:, name]
+        self._check_null(field, column, name)
+        column = self._parse(field, column, name)
+        self._check_definition(field, column, name)
+        self._check_definition(field, column, name)
+
+        return column
+
     def validate(self) -> pd.DataFrame:
         """
         Validate and process each field in the DataFrame according to its type.
@@ -361,12 +372,11 @@ class BaseModel:
         assumed to be implemented in the same class and are used to perform
         specific validation and processing tasks on each field.
         """
-        for name, field in self.field_type.items():
-            column = self.frame.loc[:, name]
-            self._check_null(field, column, name)
-            column = self._parse(field, column, name)
-            self._check_definition(field, column, name)
-            self._check_definition(field, column, name)
-            self.frame.loc[:, name] = column
-
-        return self.frame
+        columns = Parallel(
+            n_jobs=self.n_jobs
+        )(
+            delayed(
+                self._validate
+            )(field, name) for name, field in self.field_type.items()
+        )
+        return pd.concat(columns, axis=1)
