@@ -58,8 +58,10 @@ class BaseModel:
     field_type : dict
         A dictionary mapping field names to their types, excluding special
         methods.
+    n_jobs : int, default=-1
+        The number of jobs to run in parallel.
     """
-    def __init__(self, frame: pd.DataFrame, n_jobs: int) -> None:
+    def __init__(self, frame: pd.DataFrame, n_jobs: int = -1) -> None:
         if not isinstance(frame, pd.DataFrame):
             raise ValueError("Argument 'frame' must be 'pd.DataFrame'.")
 
