@@ -12,13 +12,13 @@ __all__ = [
     "Dictionary",
     "Object"
 ]
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __author__ = "Yuen Shing Yan Hindy"
 
 
 from datetime import datetime
 import numpy as np
-from src.vrame._column_types_validation import (
+from vrame._column_types_validation import (
     _validate_int,
     _validate_float,
     _validate_bool,

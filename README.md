@@ -21,11 +21,8 @@ First, define a schema for your DataFrame using Vrame's syntax, which is similar
     
     import pandas as pd
     import numpy as np
-    from models import Model
-    import time
-    import matplotlib.pyplot as plt
-    from src.vrame.basemodel import BaseModel
-    from src.vrame.column_types import (
+    from vrame.basemodel import BaseModel
+    from vrame.column_types import (
         Integer,
         Float,
         Boolean,

@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime, date
-from src.vrame._column_types_validation import (
+from vrame._column_types_validation import (
     _validate_int,
     _validate_float,
     _validate_bool,

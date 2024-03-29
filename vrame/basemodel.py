@@ -1,12 +1,12 @@
 """This module contains `BaseModel`."""
 
 __all__ = ["BaseModel"]
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __author__ = "Yuen Shing Yan Hindy"
 
 from datetime import datetime
 import pandas as pd
-from src.vrame.column_types import (
+from vrame.column_types import (
     Integer,
     Float,
     Boolean,
@@ -18,14 +18,14 @@ from src.vrame.column_types import (
     Set, 
     Object
 )
-from src.vrame._column_validation import (
+from vrame._column_validation import (
     _try_eval,
     _vec_isinstance,
     _vec_isnumeric,
     _vec_is_datetime,
     _vec_len
 )
-from src.vrame.error import ParseError, OutOfBoundError
+from vrame.error import ParseError, OutOfBoundError
 from joblib import Parallel, delayed
 
 

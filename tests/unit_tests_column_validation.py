@@ -4,7 +4,7 @@ from datetime import datetime
 import pandas as pd
 import numpy as np
 
-from src.vrame._column_validation import (
+from vrame._column_validation import (
     _try_eval,
     _vec_isinstance,
     _vec_isnumeric,

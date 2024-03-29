@@ -8,7 +8,7 @@ __all__ = [
     "_validate_datetime",
     "_validate_positive_int"
 ]
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __author__ = "Yuen Shing Yan Hindy"
 
 from typing import Any
