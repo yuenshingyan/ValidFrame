@@ -5,8 +5,6 @@ __all__ = [
     "Float",
     "Boolean",
     "Datetime",
-    "Date",
-    "Time",
     "String",
     "List",
     "Tuple",
@@ -18,7 +16,7 @@ __version__ = "1.0.0"
 __author__ = "Yuen Shing Yan Hindy"
 
 
-from datetime import datetime, date, time
+from datetime import datetime
 import numpy as np
 from src.vrame._column_types_validation import (
     _validate_int,
