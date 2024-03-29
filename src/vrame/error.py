@@ -1,7 +1,7 @@
-"""This module contains all custom error for ValidFrame."""
+"""This module contains all custom error for `Vrame`."""
 
 __all__ = ["ParseError", "OutOfBoundError"]
-__version__ = "alpha"
+__version__ = "1.0.0"
 __author__ = "Yuen Shing Yan Hindy"
 
 

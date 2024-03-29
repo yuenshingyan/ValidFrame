@@ -1,10 +1,12 @@
-"""This module contains all datatypes for ValidFrame."""
+"""This module contains all datatypes for `Vrame`."""
 
 __all__ = [
     "Integer",
     "Float",
     "Boolean",
     "Datetime",
+    "Date",
+    "Time",
     "String",
     "List",
     "Tuple",
@@ -12,13 +14,13 @@ __all__ = [
     "Dictionary",
     "Object"
 ]
-__version__ = "alpha"
+__version__ = "1.0.0"
 __author__ = "Yuen Shing Yan Hindy"
 
 
-from datetime import datetime
+from datetime import datetime, date, time
 import numpy as np
-from src.vframe._column_types_validation import (
+from src.vrame._column_types_validation import (
     _validate_int,
     _validate_float,
     _validate_bool,
@@ -212,73 +214,6 @@ class Boolean:
         """
 
         return f"Boolean(nullable={self.nullable}, skipna={self.skipna})"
-    
-    
-class Datetime:
-    """
-    A class to represent a datetime range with validation and optional
-    nullability.
-
-    Parameters
-    ----------
-    lower : datetime | str
-        The lower bound of the datetime range. Can be a datetime object or a
-        string.
-    upper : datetime | str
-        The upper bound of the datetime range. Can be a datetime object or a
-        string.
-    nullable : bool, optional
-        Indicates whether the datetime range can include null values, by
-        default True.
-    skipna : bool, optional
-        Indicates whether to skip null values in the datetime range, by
-        default True.
-
-    Attributes
-    ----------
-    lower : datetime | str
-        The lower bound of the datetime range.
-    upper : datetime | str
-        The upper bound of the datetime range.
-    nullable : bool
-        Indicates whether the datetime range can include null values.
-    skipna : bool
-        Indicates whether to skip null values in the datetime range.
-
-    Methods
-    -------
-    __repr__()
-        Returns a string representation of the Datetime object.
-
-    Notes
-    -----
-    The class validates the datetime inputs and nullable/skipna flags upon
-    initialization.
-    """
-
-    def __init__(self, lower: datetime | str, upper: datetime | str,
-                 nullable: bool = True, skipna: bool = True) -> None:
-        _validate_datetime(lower, "lower")
-        _validate_datetime(upper, "upper")
-        _validate_bool(nullable, "nullable")
-
-        self.lower = lower
-        self.upper = upper
-        self.nullable = nullable
-        self.skipna = skipna
-
-    def __repr__(self):
-        """
-        Returns a string representation of `Datetime`.
-
-        Returns
-        -------
-        str
-            A string representation of `Datetime`, including its nullability.
-        """
-
-        return (f"Datetime(lower={self.lower}, upper={self.upper}, "
-                f"nullable={self.nullable}, skipna={self.skipna})")
 
     
 class String:
@@ -344,7 +279,77 @@ class String:
         return (f"String(min_length={self.min_length}, "
                 f"max_length={self.max_length}, nullable={self.nullable}, "
                 f"skipna={self.skipna})")
-    
+
+
+class Datetime:
+    """
+    A class to represent a datetime range with validation and optional
+    nullability.
+
+    Parameters
+    ----------
+    lower : datetime | str
+        The lower bound of the datetime range. Can be a datetime object or a
+        string.
+    upper : datetime | str
+        The upper bound of the datetime range. Can be a datetime object or a
+        string.
+    nullable : bool, optional
+        Indicates whether the datetime range can include null values, by
+        default True.
+    skipna : bool, optional
+        Indicates whether to skip null values in the datetime range, by
+        default True.
+
+    Attributes
+    ----------
+    lower : datetime | str
+        The lower bound of the datetime range.
+    upper : datetime | str
+        The upper bound of the datetime range.
+    nullable : bool
+        Indicates whether the datetime range can include null values.
+    skipna : bool
+        Indicates whether to skip null values in the datetime range.
+
+    Methods
+    -------
+    __repr__()
+        Returns a string representation of the Datetime object.
+
+    Notes
+    -----
+    The class validates the datetime inputs and nullable/skipna flags upon
+    initialization.
+    """
+
+    def __init__(self, lower: datetime | str, upper: datetime | str,
+                 nullable: bool = True, skipna: bool = True,
+                 yearfirst: bool = False) -> None:
+        _validate_datetime(lower, "lower")
+        _validate_datetime(upper, "upper")
+        _validate_bool(nullable, "nullable")
+
+        self.lower = lower
+        self.upper = upper
+        self.nullable = nullable
+        self.skipna = skipna
+        self.yearfirst = yearfirst
+
+    def __repr__(self):
+        """
+        Returns a string representation of `Datetime`.
+
+        Returns
+        -------
+        str
+            A string representation of `Datetime`, including its nullability.
+        """
+
+        return (f"Datetime(lower={self.lower}, upper={self.upper}, "
+                f"nullable={self.nullable}, skipna={self.skipna}, "
+                f"yearfirst={self.yearfirst})")
+
 
 class List:
     """

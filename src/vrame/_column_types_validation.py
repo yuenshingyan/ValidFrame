@@ -8,7 +8,7 @@ __all__ = [
     "_validate_datetime",
     "_validate_positive_int"
 ]
-__version__ = "alpha"
+__version__ = "1.0.0"
 __author__ = "Yuen Shing Yan Hindy"
 
 from typing import Any
@@ -79,7 +79,7 @@ def _validate_bool(arg: Any, arg_str: str) -> None:
         raise ValueError(f"Argument '{arg_str}' must be bool.")
 
 
-def _is_datetime(arg: Any):
+def _is_datetime(arg: Any) -> bool:
     """
     Validate if `arg` is datetime. Should only be called by function
     `_validate_datetime`.

@@ -1,12 +1,12 @@
 """This module contains `BaseModel`."""
 
 __all__ = ["BaseModel"]
-__version__ = "alpha"
+__version__ = "1.0.0"
 __author__ = "Yuen Shing Yan Hindy"
 
 from datetime import datetime
 import pandas as pd
-from src.vframe.column_types import (
+from src.vrame.column_types import (
     Integer,
     Float,
     Boolean,
@@ -18,18 +18,18 @@ from src.vframe.column_types import (
     Set, 
     Object
 )
-from src.vframe._column_validation import (
+from src.vrame._column_validation import (
     _try_eval,
     _vec_isinstance,
     _vec_isnumeric,
-    vec_is_datetime,
+    _vec_is_datetime,
     _vec_len
 )
-from src.vframe.error import ParseError, OutOfBoundError
+from src.vrame.error import ParseError, OutOfBoundError
 from joblib import Parallel, delayed
 
 
-Fields = (Integer | Float | Boolean | Datetime | String | List | Tuple | 
+Fields = (Integer | Float | Boolean | Datetime | String | List | Tuple |
           Dictionary | Set | Object)
 
 
@@ -146,7 +146,7 @@ class BaseModel:
             ):
                 column = column.apply(_try_eval)
             elif isinstance(field, Datetime):
-                column = pd.to_datetime(column)
+                column = pd.to_datetime(column, yearfirst=field.yearfirst)
             elif isinstance(field, String):
                 column = column.astype(str)
         except (NameError, pd.errors.UndefinedVariableError):
@@ -275,7 +275,7 @@ class BaseModel:
                         f"Maximum value in column {name} exceeded upper "
                         f"bound. Upper bound is {field.upper}, max value in "
                         f"column {name} is {column_max}")
-        elif isinstance(field, Datetime) and not vec_is_datetime(column):
+        elif isinstance(field, Datetime) and not _vec_is_datetime(column):
             raise TypeError(f"Not all values in column {name} are datetime.")
 
     @staticmethod
@@ -341,7 +341,7 @@ class BaseModel:
                     f"{field.max_length}."
                 )
 
-    def _validate(self, field: Fields, name: str) -> pd.Series:
+    def _parse_and_validate(self, field: Fields, name: str) -> pd.Series:
         column = self.frame.loc[:, name]
         self._check_null(field, column, name)
         column = self._parse(field, column, name)
@@ -350,7 +350,7 @@ class BaseModel:
 
         return column
 
-    def validate(self) -> pd.DataFrame:
+    def parse_and_validate(self) -> pd.DataFrame:
         """
         Validate and process each field in the DataFrame according to its type.
 
@@ -378,7 +378,7 @@ class BaseModel:
             n_jobs=self.n_jobs
         )(
             delayed(
-                self._validate
+                self._parse_and_validate
             )(field, name) for name, field in self.field_type.items()
         )
         return pd.concat(columns, axis=1)

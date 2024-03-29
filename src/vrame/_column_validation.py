@@ -4,14 +4,14 @@ __all__ = [
     "_try_eval",
     "_vec_isinstance",
     "_vec_isnumeric",
-    "vec_is_datetime",
+    "_vec_is_datetime",
     "_vec_len"
 ]
-__version__ = "alpha"
+__version__ = "1.0.0"
 __author__ = "Yuen Shing Yan Hindy"
 
 
-from datetime import datetime
+from datetime import datetime, date, time
 import numpy as np
 from typing import Iterable, Any
 
@@ -87,7 +87,7 @@ def _vec_isnumeric(arg: Iterable) -> bool:
     return is_numeric.sum() == len(is_numeric)
 
 
-def vec_is_datetime(arg: Iterable) -> bool:
+def _vec_is_datetime(arg: Iterable) -> bool:
     """
     Validates if all cell values are datetime.
 
