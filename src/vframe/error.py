@@ -6,12 +6,16 @@ __author__ = "Yuen Shing Yan Hindy"
 
 
 class ParseError(Exception):
-    """Raised when any of the cell values cannot be parsed."""
+    """
+    Raised when any of the cell values cannot be parsed.
+    """
     pass
 
 
 class OutOfBoundError(Exception):
-    """Raised when any of the cell values are higher or lower than the
-    defined range. This error is applicable to both the upper and lower
-    bounds and also the minimum and maximum number of items."""
+    """
+    Raised when any of the cell values are higher or lower than the defined
+    range. This error is applicable to both the upper and lower bounds and
+    also the minimum and maximum number of items.
+    """
     pass

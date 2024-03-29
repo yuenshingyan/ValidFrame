@@ -23,7 +23,7 @@ def _try_eval(arg: Any) -> Any:
 
     Parameters
     ----------
-    arg: Any
+    arg : Any
         Cell values being parsed.
 
     Returns
@@ -48,10 +48,10 @@ def _vec_isinstance(arg: Iterable, dtype: Any) -> bool:
 
     Parameters
     ----------
-    arg: Iterable
+    arg : Iterable
         Cell values that being validated.
 
-    dtype: Any
+    dtype : Any
         Datatype that being validated.
 
     Returns
@@ -71,7 +71,7 @@ def _vec_isnumeric(arg: Iterable) -> bool:
 
     Parameters
     ----------
-    arg: Iterable
+    arg : Iterable
         Cell values that being validated.
 
     Returns
@@ -93,7 +93,7 @@ def vec_is_datetime(arg: Iterable) -> bool:
 
     Parameters
     ----------
-    arg: Iterable
+    arg : Iterable
         Cell values that being validated.
 
     Returns
@@ -113,7 +113,7 @@ def _vec_len(arg: Iterable) -> np.ndarray:
 
     Parameters
     ----------
-    arg: Iterable
+    arg : Iterable
         Cell values that being checked for their length.
 
     Returns
