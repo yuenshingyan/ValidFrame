@@ -78,4 +78,4 @@ First, define a schema for your DataFrame using Vrame's syntax, which is similar
         )
 
         m = Model(df)
-        df = m.validate()
+        df = m.parse_and_validate()
