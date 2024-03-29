@@ -1,7 +1,7 @@
 """This module contains `BaseModel`."""
 
 __all__ = ["BaseModel"]
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "Yuen Shing Yan Hindy"
 
 from datetime import datetime

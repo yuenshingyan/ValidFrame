@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Vrame"
+version = "1.0.1"
+authors = [
+  { name="Yuen Shing Yan Hindy", email="yuenshingyan@gmail.com" },
+]
+description = "Efficiently parse and validate all columns in pandas DataFrame."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+keywords = ["pandas", "pd", "dataframe", "df", "validation", "validate",
+    "parsing", "parse", "pydantic", "Pydantic", "effcient", "effciently"]
+
+[project.urls]
+Homepage = "https://github.com/yuenshingyan/Vrame"
+Issues = "https://github.com/yuenshingyan/Vrame/issues"

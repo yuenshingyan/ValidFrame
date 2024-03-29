@@ -1,7 +1,7 @@
 """This module contains all custom error for `Vrame`."""
 
 __all__ = ["ParseError", "OutOfBoundError"]
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "Yuen Shing Yan Hindy"
 
 

@@ -1,6 +1,6 @@
-# ValidFrame
+# Vrame
 
-ValidFrame is a Python library designed to efficiently parse and validate all columns in a pandas DataFrame. It leverages the vectorized operations of pandas to significantly speed up the validation process, making it a powerful tool for data validation in data science and machine learning projects.
+Vrame is a Python library designed to efficiently parse and validate all columns in pandas DataFrame. It leverages the vectorized operations of pandas to significantly speed up the validation process, making it a powerful tool for data validation in data science and machine learning projects.
 
 ## Features
 
@@ -10,22 +10,22 @@ ValidFrame is a Python library designed to efficiently parse and validate all co
 
 ## Installation
 
-To install ValidFrame, use pip:
+To install Vrame, use pip:
 
-    pip install validframe
+    pip install vrame
 
 
 ## Usage
 
-First, define a schema for your DataFrame using ValidFrame's syntax, which is similar to Pydantic's:
+First, define a schema for your DataFrame using Vrame's syntax, which is similar to Pydantic's:
     
     import pandas as pd
     import numpy as np
     from models import Model
     import time
     import matplotlib.pyplot as plt
-    from src.vframe.basemodel import BaseModel
-    from src.vframe.column_types import (
+    from src.vrame.basemodel import BaseModel
+    from src.vrame.column_types import (
         Integer,
         Float,
         Boolean,

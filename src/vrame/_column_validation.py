@@ -7,13 +7,14 @@ __all__ = [
     "_vec_is_datetime",
     "_vec_len"
 ]
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "Yuen Shing Yan Hindy"
 
 
-from datetime import datetime, date, time
+from datetime import datetime
 import numpy as np
-from typing import Iterable, Any
+import pandas as pd
+from typing import Any
 
 
 def _try_eval(arg: Any) -> Any:
@@ -42,13 +43,13 @@ def _try_eval(arg: Any) -> Any:
         return arg
 
 
-def _vec_isinstance(arg: Iterable, dtype: Any) -> bool:
+def _vec_isinstance(arg: pd.Series, dtype: Any) -> bool:
     """
     Validates if all cell values are the same datatype.
 
     Parameters
     ----------
-    arg : Iterable
+    arg : pd.Series
         Cell values that being validated.
 
     dtype : Any
@@ -65,13 +66,13 @@ def _vec_isinstance(arg: Iterable, dtype: Any) -> bool:
     return (is_dtype > 0).sum() == len(is_dtype)
 
 
-def _vec_isnumeric(arg: Iterable) -> bool:
+def _vec_isnumeric(arg: pd.Series) -> bool:
     """
     Validates if all cell values are numeric.
 
     Parameters
     ----------
-    arg : Iterable
+    arg : pd.Series
         Cell values that being validated.
 
     Returns
@@ -87,13 +88,13 @@ def _vec_isnumeric(arg: Iterable) -> bool:
     return is_numeric.sum() == len(is_numeric)
 
 
-def _vec_is_datetime(arg: Iterable) -> bool:
+def _vec_is_datetime(arg: pd.Series) -> bool:
     """
     Validates if all cell values are datetime.
 
     Parameters
     ----------
-    arg : Iterable
+    arg : pd.Series
         Cell values that being validated.
 
     Returns
@@ -107,13 +108,13 @@ def _vec_is_datetime(arg: Iterable) -> bool:
     return is_datetime.sum() == len(is_datetime)
 
 
-def _vec_len(arg: Iterable) -> np.ndarray:
+def _vec_len(arg: pd.Series) -> np.ndarray:
     """
     Returns the length of the cell values.
 
     Parameters
     ----------
-    arg : Iterable
+    arg : pd.Series
         Cell values that being checked for their length.
 
     Returns
